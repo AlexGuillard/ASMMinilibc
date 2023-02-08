@@ -16,6 +16,10 @@ jobs:
     - name: Compile
       run: |
         make
+    
+    - name: test run
+      run: |
+        make tests_run
 
   push_to_mirror:
     needs: check_compilation

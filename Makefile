@@ -7,9 +7,9 @@
 
 MAIN =
 
-SRC = strlen.asm
+SRC = strlen.asm \
 
-SRC_T = 
+SRC_T = tests/tests_strlen.c \
 
 OBJ = $(MAIN:%.c=%.o) $(SRC:%.asm=%.o)
 
@@ -54,7 +54,7 @@ fclean: clean
 re: fclean all
 
 $(NAME_T): fclean all $(OBJ_T)
-	gcc $(SRC_T) -lcriterion --coverage -o $(NAME_T)
+	$(CC) $(SRC_T) -lcriterion --coverage -o $(NAME_T)
 
 tests_run: $(NAME_T)
 	./$(NAME_T)
