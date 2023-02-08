@@ -9,10 +9,17 @@ jobs:
   check_compilation:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: compilation
-        run: |
-          make
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up GCC
+      uses: actions/setup-gcc@v1
+      with:
+        gcc-version: 9
+
+    - name: Compile code
+      run: |
+        make
 
   push_to_mirror:
     needs: check_compilation
