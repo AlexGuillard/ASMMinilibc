@@ -1,5 +1,3 @@
 *.gcno
 *.gcda
-*.o
-*.so
 *.a
