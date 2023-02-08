@@ -1,12 +1,6 @@
 name: chocoltine
 
-on:
-  push:
-    branches-ignore:
-      - ga-ignore-
-  pull_request:
-    branches-ignore:
-      - ga-ignore-
+on: [push]
 
 env:
   MIRROR_URL: "git@github.com:EpitechPromo2026/B-ASM-400-NAN-4-1-asmminilibc-alexandre.guillard.git"
@@ -18,7 +12,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: compilation
         run: |
-        make
+          make
 
   push_to_mirror:
     needs: check_compilation
