@@ -1,0 +1,33 @@
+name: chocoltine
+
+on:
+  push:
+    branches-ignore:
+      - ga-ignore-
+  pull_request:
+    branches-ignore:
+      - ga-ignore-
+
+env:
+  MIRROR_URL: "git@github.com:EpitechPromo2026/B-ASM-400-NAN-4-1-asmminilibc-alexandre.guillard.git"
+
+jobs:
+  check_compilation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: compilation
+        run: |
+        make
+
+  push_to_mirror:
+    needs: check_compilation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: pixta-dev/repository-mirroring-action@v1
+        with:
+          target_repo_url: ${{ env.MIRROR_URL }}
+          ssh_private_key: ${{ secrets.GIT_SSH_PRIVATE_KEY }}
