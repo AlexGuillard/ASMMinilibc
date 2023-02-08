@@ -8,13 +8,10 @@ env:
 jobs:
   check_compilation:
     runs-on: ubuntu-latest
+    container: epitechcontent/epitest-docker:latest
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-
-    - name: install nasm
-      run: |
-        apt-get install nasm
 
     - name: Compile
       run: |
