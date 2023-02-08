@@ -9,10 +9,7 @@ jobs:
   check_compilation:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Compile code
+    - name: Compile
       run: |
         make
 
