@@ -12,6 +12,11 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: install nasm
+      run: |
+        apt-get update
+        apt-get install nasm
+
     - name: Compile
       run: |
         make
