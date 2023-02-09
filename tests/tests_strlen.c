@@ -25,3 +25,8 @@ Test(strlen, len_10)
 {
     cr_assert_eq(strlen("OUI et NON"), 10);
 }
+
+Test(strlen, len_0)
+{
+    cr_assert_eq(strlen(""), 0);
+}
