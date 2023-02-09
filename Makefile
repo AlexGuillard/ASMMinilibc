@@ -13,7 +13,7 @@ SRC_T = tests/tests_strlen.c \
 
 OBJ = $(MAIN:%.c=%.o) $(SRC:%.asm=%.o)
 
-OBJ_T = $(SRC:%.asm=%.o) $(SRC_T.c=.o)
+OBJ_T = $(SRC_T:%.c=%.o) $(SRC:%.asm=%.o) 
 
 NAME = libasm.so
 
@@ -54,7 +54,7 @@ fclean: clean
 re: fclean all
 
 $(NAME_T): fclean all $(OBJ_T)
-	$(CC) $(SRC_T) -lcriterion --coverage -o $(NAME_T)
+	$(CC) $(OBJ_T) -lcriterion --coverage -o $(NAME_T)
 
 tests_run: $(NAME_T)
 	./$(NAME_T)
