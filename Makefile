@@ -8,8 +8,9 @@
 MAIN =
 
 SRC = strlen.asm \
+		strchr.asm
 
-SRC_T = tests/tests_strlen.c \
+SRC_T =
 
 OBJ = $(MAIN:%.c=%.o) $(SRC:%.asm=%.o)
 

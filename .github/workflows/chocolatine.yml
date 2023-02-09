@@ -19,7 +19,8 @@ jobs:
     
     - name: test run
       run: |
-        make tests_run
+        gcc main.c -o test
+        LD_LIBRARY_PATH=libasm.so ./test
 
   push_to_mirror:
     needs: check_compilation

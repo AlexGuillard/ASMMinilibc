@@ -1,7 +1,7 @@
 BITS 64
 section .text
 
-GLOBAL my_strlen
+GLOBAL strlen
 
 strlen:
     ENTER 0, 0
