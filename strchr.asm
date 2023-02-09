@@ -6,17 +6,19 @@ GLOBAL strchr
 strchr:
     ENTER 0, 0
     XOR RAX, RAX
-    MOV RAX,0
+    MOV RAX, 0
 
 loop:
-    CMP BYTE[RDI], 0
+    CMP BYTE [RDI], 0
     JE end
+    CMP [RDI], SIL
+    JE find
     INC RDI
-    CMP [RDI], RSI
-    JNE loop
+    JMP loop
+
+find:
     MOV RAX, RDI
     JMP end
-
 end:
     LEAVE
     RET
