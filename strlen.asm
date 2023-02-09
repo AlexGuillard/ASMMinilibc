@@ -8,12 +8,15 @@ strlen:
     XOR RAX, RAX
     MOV RSI, 0
 
-    loop:
-        INC RDI
-        INC RSI
-        CMP BYTE[RDI], 0
-        JNE loop
+loop:
+    CMP BYTE[RDI], 0
+    JE end
+    INC RDI
+    INC RSI
+    CMP BYTE[RDI], 0
+    JNE loop
 
+end:
     MOV RAX, RSI
     LEAVE
     RET
