@@ -8,7 +8,8 @@
 MAIN =
 
 SRC = strlen.asm \
-		strchr.asm
+		strchr.asm \
+		strrchr.asm \
 
 SRC_T =
 
