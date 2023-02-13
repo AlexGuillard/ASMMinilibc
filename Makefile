@@ -10,6 +10,7 @@ MAIN =
 SRC = strlen.asm \
 		strchr.asm \
 		strrchr.asm \
+		memset.asm \
 
 SRC_T =
 
@@ -35,6 +36,8 @@ LDFLAGS = -fpic -shared
 
 LSFLAGS = ar rc
 
+LIB = -L./ -lasm
+
 all: $(NAME)
 
 %.o: %.asm
@@ -56,8 +59,10 @@ fclean: clean
 re: fclean all
 
 $(NAME_T): fclean all $(OBJ_T)
-	$(CC) $(OBJ_T) -lcriterion --coverage -o $(NAME_T)
+	$(CC) $(OBJ_T) -lcriterion --coverage -o $(NAME_T) $(LIB) -ldl
 
 tests_run: $(NAME_T)
 	./$(NAME_T)
 	gcovr --exclude tests -b
+
+#
