@@ -8,8 +8,18 @@ memset:
     XOR RAX, RAX
     MOV RAX, 0
     MOV RCX, 0
+    MOV R8, RDI
+
+loop:
+    CMP BYTE [RDI], 0
+    JE end
+    CMP RDX, RCX
+    JE end
+    MOV [RDI], SIL
     PUSH RSI
-    POP DIL
+    INC RDI
+    INC RCX
+    JMP loop
 
 end:
     LEAVE

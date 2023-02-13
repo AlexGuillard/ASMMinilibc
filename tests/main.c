@@ -125,7 +125,7 @@ int memset_fonction(void *handle)
     int memset_passed = 0;
 
     char *strmemset1 = strdup("AAAAAA");
-    _memset(strmemset1, 'B', 2);
+    (*_memset)(strmemset1, 'B', 3);
     printf("%s\n", strmemset1);
     //if (strcmp(_memset(strmemset1, )))
     printf("Memset: %i/5\n", memset_passed);
