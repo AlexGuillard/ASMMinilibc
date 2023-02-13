@@ -19,7 +19,7 @@ jobs:
     
     - name: test run
       run: |
-        gcc main.c -o test
+        ./tests/test.sh
         LD_LIBRARY_PATH=libasm.so ./test
 
   push_to_mirror:
