@@ -31,8 +31,10 @@ int strlen_fonction(void *handle)
         strlen_passed += 1;
     if (_strlen("") == 0)
         strlen_passed += 1;
+    if (_strlen("AA") == 2)
+        strlen_passed += 1;
 
-    printf("Strlen: %i/4\n", strlen_passed);
+    printf("Strlen: %i/5\n", strlen_passed);
     fflush(stdout);
 
     return strlen_passed;
@@ -50,26 +52,56 @@ int strchr_fonction(void *handle)
     char *strchr4 = strdup("OUI et NON");
     char *strchr5 = strdup("OUI et NON");
 
-    if (strcmp(_strchr(strchr1, 'I'), "I") == 0);
+    if (strcmp(_strchr(strchr1, 'I'), "I") == 0) {
         strchr_passed += 1;
-    if (strcmp(_strchr(strchr2, 'O'), "O") == 0);
+        //printf("1: Oui ");
+        //fflush(stdout);
+    }
+    if (strcmp(_strchr(strchr2, 'O'), "O") == 0) {
         strchr_passed += 1;
-    if (strcmp(_strchr(strchr3, 'O'), "OUI et NON") == 0);
+        //printf("2: Oui ");
+        //fflush(stdout);
+    }
+    if (strcmp(_strchr(strchr3, 'O'), "OUI et NON") == 0) {
         strchr_passed += 1;
-    if (strcmp(_strchr(strchr4, 'e'), "et NON") == 0);
+        //printf("3: Oui ");
+        //fflush(stdout);
+    }
+    if (strcmp(_strchr(strchr4, 'e'), "et NON") == 0) {
         strchr_passed += 1;
-    if (_strchr(strchr5, 'Z') == NULL);
+        //printf("4: Oui ");
+        //fflush(stdout);
+    }
+    if (_strchr(strchr5, 'Z') == NULL) {
         strchr_passed += 1;
-    if (_strchr(strchr5, 0) == NULL);
+        //printf("5: Oui ");
+        //fflush(stdout);
+    }
+    if (strcmp(_strchr(strchr5, '\0'), "\0") == 0) {
         strchr_passed += 1;
-    if (_strchr("", 'a') == NULL);
+        //printf("6: Oui ");
+        //fflush(stdout);
+    }
+    if (_strchr("", 'a') == NULL) {
         strchr_passed += 1;
-    if (_strchr("", 0) == NULL);
+        //printf("7: Oui ");
+        //fflush(stdout);
+    }
+    if (_strchr("\0", '\0') == NULL) {
         strchr_passed += 1;
-    if ((*_strchr)("\0", '\0') == strchr("\0", '\0'));
+        //printf("8: Oui ");
+        //fflush(stdout);
+    }
+    if (strcmp(_strchr("\0", '\0'), "\0") == 0) {
         strchr_passed += 1;
-    if ((*_strchr)("ABCD", '\0') == NULL);
+        //printf("9: Oui ");
+        //fflush(stdout);
+    }
+    if (strcmp(strchr("ABCD", '\0'), "\0") == 0) {
         strchr_passed += 1;
+        //printf("10: Oui ");
+        //fflush(stdout); 
+    }
 
     free(strchr1);
     free(strchr2);
@@ -77,7 +109,7 @@ int strchr_fonction(void *handle)
     free(strchr4);
     free(strchr5);
 
-    printf("Strchr: %i/10\n", strchr_passed);
+    printf("Strchr: %i/9\n", strchr_passed);
     fflush(stdout);
 
     return strchr_passed;
@@ -95,16 +127,56 @@ int strrchr_fonction(void *handle)
     char *strrchr4 = strdup("OUI et NON");
     char *strrchr5 = strdup("OUI et NON");
 
-    if (strcmp(_strrchr(strrchr1, 'I'), "I") == 0)
+    if (strcmp(_strrchr(strrchr1, 'I'), "I") == 0) {
         strrchr_passed += 1;
-    if (strcmp(_strrchr(strrchr2, 'O'), "O") == 0)
+        //printf("1: Oui ");
+        //fflush(stdout);
+    }
+    if (strcmp(_strrchr(strrchr2, 'O'), "O") == 0) {
         strrchr_passed += 1;
-    if (strcmp(_strrchr(strrchr3, 'O'), "ON") == 0)
+        //printf("2: Oui ");
+        //fflush(stdout);
+    }
+    if (strcmp(_strrchr(strrchr3, 'O'), "ON") == 0) {
         strrchr_passed += 1;
-    if (strcmp(_strrchr(strrchr4, 'e'), "et NON") == 0)
+        //printf("3: Oui ");
+        //fflush(stdout);
+    }
+    if (strcmp(_strrchr(strrchr4, 'e'), "et NON") == 0) {
         strrchr_passed += 1;
-    if (_strrchr(strrchr5, 'Z') == NULL)
+        //printf("4: Oui ");
+        //fflush(stdout);
+    }
+    if (_strrchr(strrchr5, 'Z') == NULL) {
         strrchr_passed += 1;
+        //printf("5: Oui ");
+        //fflush(stdout);
+    }
+    if (strcmp(_strrchr(strrchr5, '\0'), "\0") == 0) {
+        strrchr_passed += 1;
+        //printf("6: Oui ");
+        //fflush(stdout);
+    }
+    if (_strrchr("", 'a') == NULL) {
+        strrchr_passed += 1;
+        //printf("7: Oui ");
+        //fflush(stdout);
+    }
+    if (_strrchr("\0", '\0') == NULL) {
+        strrchr_passed += 1;
+        //printf("8: Oui ");
+        //fflush(stdout);
+    }
+    if (strcmp(_strrchr("\0", '\0'), "\0") == 0) {
+        strrchr_passed += 1;
+        //printf("9: Oui ");
+        //fflush(stdout);
+    }
+    if (strcmp(strrchr("ABCD", '\0'), "\0") == 0) {
+        strrchr_passed += 1;
+        //printf("10: Oui ");
+        //fflush(stdout); 
+    }
 
     free(strrchr1);
     free(strrchr2);
@@ -112,7 +184,7 @@ int strrchr_fonction(void *handle)
     free(strrchr4);
     free(strrchr5);
 
-    printf("Strrchr: %i/5\n", strrchr_passed);
+    printf("Strrchr: %i/9\n", strrchr_passed);
     fflush(stdout);
 
     return strrchr_passed;
@@ -220,7 +292,7 @@ int main()
     void *handle;
     handle = dlopen("./libmy.so", RTLD_LAZY);
 
-    int total = 19;
+    int total = 23;
     int passed = 0;
     int failed = 0;
 
