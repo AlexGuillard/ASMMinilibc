@@ -7,6 +7,8 @@ strchr:
     ENTER 0, 0
     XOR RAX, RAX
     MOV RAX, 0
+    CMP BYTE [RSI], 0
+    JE void
 
 loop:
     CMP BYTE [RDI], 0
@@ -16,9 +18,13 @@ loop:
     INC RDI
     JMP loop
 
+void:
+    MOV RAX, RSI
+    JMP end
+
 find:
+    MOV RAX, RDI
     JMP end
 end:
-    MOV RAX, RDI
     LEAVE
     RET
