@@ -11,6 +11,7 @@ SRC = strlen.asm \
 		strchr.asm \
 		strrchr.asm \
 		memset.asm \
+		memcpy.asm \
 
 SRC_T =
 

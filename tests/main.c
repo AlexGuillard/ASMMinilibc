@@ -15,7 +15,8 @@
 extern size_t strlen(const char *str);
 extern char *strchr(const char *s, int c);
 extern char *strrchr(const char *s, int c);
-void *memset(void *pointer,int value,size_t count);
+extern void *memset(void *pointer,int value, size_t count);
+extern void *memcpy(void *dest, const void *src, size_t n);
 
 int strlen_fonction(void *handle)
 {
@@ -109,7 +110,7 @@ int strchr_fonction(void *handle)
     free(strchr4);
     free(strchr5);
 
-    printf("Strchr: %i/9\n", strchr_passed);
+    printf("Strchr: %i/10\n", strchr_passed);
     fflush(stdout);
 
     return strchr_passed;
@@ -198,23 +199,23 @@ int memset_fonction(void *handle)
 
     char *strmemset1 = strdup("AAAAAA");
     _memset(strmemset1, 'B', 9);
-    if (strcmp(strmemset1, "BBBBBB") == 0) {
+    if (strcmp(strmemset1, "BBBBBBBBB") == 0) {
         memset_passed += 1;
     }
     _memset(strmemset1, 'C', 1);
-    if (strcmp(strmemset1, "CBBBBB") == 0) {
+    if (strcmp(strmemset1, "CBBBBBBBB") == 0) {
         memset_passed += 1;
     }
     _memset(strmemset1, 'D', 3);
-    if (strcmp(strmemset1, "DDDBBB") == 0) {
+    if (strcmp(strmemset1, "DDDBBBBBB") == 0) {
         memset_passed += 1;
     }
     _memset(strmemset1, 'E', 0);
-    if (strcmp(strmemset1, "DDDBBB") == 0) {
+    if (strcmp(strmemset1, "DDDBBBBBB") == 0) {
         memset_passed += 1;
     }
     _memset(strmemset1, 'F', 6);
-    if (strcmp(strmemset1, "FFFFFF") == 0) {
+    if (strcmp(strmemset1, "FFFFFFBBB") == 0) {
         memset_passed += 1;
     }
 
@@ -228,7 +229,64 @@ int memset_fonction(void *handle)
 
 int memcpy_fonction(void *handle)
 {
+    void *(*_memcpy)(void *, const void *, size_t);
+    *(void**)(&_memcpy) = dlsym(handle, "memcpy");
     int memcpy_passed = 0;
+
+    char *strmemcpy1 = strdup("ABCDEF");
+
+        //printf("%s ", strmemcpy1);
+        //fflush(stdout);
+    _memcpy(strmemcpy1, "GHIJKLMNO", 9);
+        //printf("%s\n", strmemcpy1);
+        //fflush(stdout);
+    if (strcmp(strmemcpy1, "GHIJKLMNO") == 0) {
+        //printf("1: Oui \n");
+        //fflush(stdout);
+        memcpy_passed += 1;
+    }
+        //printf("%s ", strmemcpy1);
+        //fflush(stdout);
+    _memcpy(strmemcpy1, "QRST", 1);
+        //printf("%s\n", strmemcpy1);
+        //fflush(stdout);
+    if (strcmp(strmemcpy1, "QHIJKLMNO") == 0) {
+        //printf("2: Oui \n");
+        //fflush(stdout);
+        memcpy_passed += 1;
+    }
+        //printf("%s ", strmemcpy1);
+        //fflush(stdout);
+    _memcpy(strmemcpy1, "WXYZ", 3);
+        //printf("%s\n", strmemcpy1);
+        //fflush(stdout);
+    if (strcmp(strmemcpy1, "WXYJKLMNO") == 0) {
+        //printf("3: Oui \n");
+        //fflush(stdout);
+        memcpy_passed += 1;
+    }
+        //printf("%s ", strmemcpy1);
+        //fflush(stdout);
+    _memcpy(strmemcpy1, "0123456789", 0);
+        //printf("%s\n", strmemcpy1);
+        //fflush(stdout);
+    if (strcmp(strmemcpy1, "WXYJKLMNO") == 0) {
+        //printf("4: Oui \n");
+        //fflush(stdout);
+        memcpy_passed += 1;
+    }
+        //printf("%s ", strmemcpy1);
+        //fflush(stdout);
+    _memcpy(strmemcpy1, "ABCDEFGHIJ", 10);
+        //printf("%s\n", strmemcpy1);
+        //fflush(stdout);
+    if (strcmp(strmemcpy1, "ABCDEFGHIJ") == 0) {
+        //printf("5: Oui \n");
+        //fflush(stdout);
+        memcpy_passed += 1;
+    }
+
+    free(strmemcpy1);
 
     printf("Memcpy: %i/5\n", memcpy_passed);
     fflush(stdout);
@@ -312,7 +370,7 @@ int main()
     void *handle;
     handle = dlopen("./libmy.so", RTLD_LAZY);
 
-    int total = 30;
+    int total = 35;
     int passed = 0;
     int failed = 0;
 

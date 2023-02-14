@@ -11,8 +11,6 @@ memset:
     MOV R8, RDI
 
 loop:
-    CMP BYTE [RDI], 0
-    JE end
     CMP RDX, RCX
     JE end
     MOV [RDI], SIL

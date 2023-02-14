@@ -7,18 +7,19 @@ memcpy:
     ENTER 0, 0
     XOR RAX, RAX
     MOV RAX, 0
+    MOV RCX, 0
 
 loop:
-    CMP BYTE [RDI], RDX
+    CMP BYTE [RSI], 0
     JE end
-    CMP RDX, RCX
+    CMP RCX, RDX
     JE end
-    MOV [RDI], SIL
-    PUSH RSI
-    INC RDI
+    MOVSB               ;
     INC RCX
     JMP loop
 
 end:
     LEAVE
     RET
+
+
