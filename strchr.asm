@@ -17,8 +17,8 @@ loop:
     JMP loop
 
 find:
-    MOV RAX, RDI
     JMP end
 end:
+    MOV RAX, RDI
     LEAVE
     RET
