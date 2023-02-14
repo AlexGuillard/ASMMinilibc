@@ -22,6 +22,7 @@ find:
     JMP loop
 
 end:
+    MOV RAX, RDI
     LEAVE
     RET
 
