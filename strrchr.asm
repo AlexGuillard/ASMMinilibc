@@ -7,7 +7,7 @@ strrchr:
     ENTER 0, 0
     XOR RAX, RAX
     MOV RAX, 0
-    CMP BYTE [RSI], 0
+    CMP SIL, 0
     JE void
 
 loop:
