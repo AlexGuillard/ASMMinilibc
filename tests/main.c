@@ -87,7 +87,7 @@ int strchr_fonction(void *handle)
         //printf("7: Oui ");
         //fflush(stdout);
     }
-    if (_strchr("\0", '\0') == NULL) {
+    if (_strchr("\0", '\0') != NULL) {
         strchr_passed += 1;
         //printf("8: Oui ");
         //fflush(stdout);
@@ -162,7 +162,7 @@ int strrchr_fonction(void *handle)
         //printf("7: Oui ");
         //fflush(stdout);
     }
-    if (_strrchr("\0", '\0') == NULL) {
+    if (_strrchr("\0", '\0') != NULL) {
         strrchr_passed += 1;
         //printf("8: Oui ");
         //fflush(stdout);
@@ -184,7 +184,7 @@ int strrchr_fonction(void *handle)
     free(strrchr4);
     free(strrchr5);
 
-    printf("Strrchr: %i/9\n", strrchr_passed);
+    printf("Strrchr: %i/10\n", strrchr_passed);
     fflush(stdout);
 
     return strrchr_passed;
@@ -197,9 +197,29 @@ int memset_fonction(void *handle)
     int memset_passed = 0;
 
     char *strmemset1 = strdup("AAAAAA");
-    (*_memset)(strmemset1, 'B', 3);
-    printf("%s\n", strmemset1);
-    //if (strcmp(_memset(strmemset1, )))
+    _memset(strmemset1, 'B', 9);
+    if (strcmp(strmemset1, "BBBBBB") == 0) {
+        memset_passed += 1;
+    }
+    _memset(strmemset1, 'C', 1);
+    if (strcmp(strmemset1, "CBBBBB") == 0) {
+        memset_passed += 1;
+    }
+    _memset(strmemset1, 'D', 3);
+    if (strcmp(strmemset1, "DDDBBB") == 0) {
+        memset_passed += 1;
+    }
+    _memset(strmemset1, 'E', 0);
+    if (strcmp(strmemset1, "DDDBBB") == 0) {
+        memset_passed += 1;
+    }
+    _memset(strmemset1, 'F', 6);
+    if (strcmp(strmemset1, "FFFFFF") == 0) {
+        memset_passed += 1;
+    }
+
+    free(strmemset1);
+
     printf("Memset: %i/5\n", memset_passed);
     fflush(stdout);
 
@@ -292,7 +312,7 @@ int main()
     void *handle;
     handle = dlopen("./libmy.so", RTLD_LAZY);
 
-    int total = 23;
+    int total = 30;
     int passed = 0;
     int failed = 0;
 
