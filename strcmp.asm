@@ -15,8 +15,8 @@ loop:
     JE check_less
     CMP BYTE [RSI], 0
     JE check_more
-    MOV R8, [RDI]
-    MOV R9, [RSI]
+    MOV R8B, BYTE [RDI]
+    MOV R9B, BYTE [RSI]
     CMP R8, R9
     JG more
     CMP R8, R9
