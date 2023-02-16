@@ -17,6 +17,7 @@ extern char *strchr(const char *s, int c);
 extern char *strrchr(const char *s, int c);
 extern void *memset(void *pointer,int value, size_t count);
 extern void *memcpy(void *dest, const void *src, size_t n);
+extern
 
 int strlen_fonction(void *handle)
 {
@@ -199,27 +200,40 @@ int memset_fonction(void *handle)
 
     char *strmemset1 = strdup("AAAAAA");
     _memset(strmemset1, 'B', 9);
+    printf("| %s |\n", strmemset1);
     if (strcmp(strmemset1, "BBBBBBBBB") == 0) {
         memset_passed += 1;
     }
     _memset(strmemset1, 'C', 1);
+    printf("| %s |\n", strmemset1);
     if (strcmp(strmemset1, "CBBBBBBBB") == 0) {
         memset_passed += 1;
     }
     _memset(strmemset1, 'D', 3);
+    printf("| %s |\n", strmemset1);
     if (strcmp(strmemset1, "DDDBBBBBB") == 0) {
         memset_passed += 1;
     }
     _memset(strmemset1, 'E', 0);
+    printf("| %s |\n", strmemset1);
     if (strcmp(strmemset1, "DDDBBBBBB") == 0) {
         memset_passed += 1;
     }
     _memset(strmemset1, 'F', 6);
+    printf("| %s |\n", strmemset1);
     if (strcmp(strmemset1, "FFFFFFBBB") == 0) {
         memset_passed += 1;
     }
 
     free(strmemset1);
+
+
+    char *strmemset2 = strdup("\0");
+    _memset(strmemset1, 'F', 6);
+    printf("\n| %s |\n", strmemset2);
+    _memset(strmemset1, '\0', 6);
+    printf("| %s |\n\n", strmemset2);
+
 
     printf("Memset: %i/5\n", memset_passed);
     fflush(stdout);
@@ -229,7 +243,7 @@ int memset_fonction(void *handle)
 
 int memcpy_fonction(void *handle)
 {
-    void *(*_memcpy)(void *, const void *, size_t);
+    void *(*_memcpy)(void *, void *, size_t);
     *(void**)(&_memcpy) = dlsym(handle, "memcpy");
     int memcpy_passed = 0;
 
@@ -296,8 +310,25 @@ int memcpy_fonction(void *handle)
 
 int strcmp_fonction(void *handle)
 {
+    int (*_strcmp)(char *, char *);
+    *(void **)(&_strcmp) = dlsym(handle, "strcmp");
     int strcmp_passed = 0;
 
+    if (_strcmp("AAA", "AAA") == 0) {
+        strcmp_passed += 1;
+    }
+    if (_strcmp("", "ui") == -1) {
+        strcmp_passed += 1;
+    }
+    if (_strcmp("dfrety", "ui") == -1) {
+        strcmp_passed += 1;
+    }
+    if (_strcmp("AAAAAA", "a") == -1) {
+        strcmp_passed += 1;
+    }
+    if (_strcmp("abe", "abc") == 1) {
+        strcmp_passed += 1;
+    }
     printf("Strcmp: %i/5\n", strcmp_passed);
     fflush(stdout);
 
@@ -316,8 +347,26 @@ int memmove_fonction(void *handle)
 
 int strncmp_fonction(void *handle)
 {
+    int (*_strncmp)(char *, char *, size_t);
+    *(void **)(&_strncmp) = dlsym(handle, "strncmp");
     int strncmp_passed = 0;
 
+        printf("%i", _strncmp("AAA", "AAAB", 3));
+    if (_strncmp("AAA", "AAAB", 3) == 0) {
+        strncmp_passed += 1;
+    }
+    if (_strncmp("", "ui", 0) == 0) {
+        strncmp_passed += 1;
+    }
+    if (_strncmp("dfrety", "ui", 2) == -17) {
+        strncmp_passed += 1;
+    }
+    if (_strncmp("AAAAAAa", "a", 5) == -32) {
+        strncmp_passed += 1;
+    }
+    if (_strncmp("abe", "abc", 3) == 2) {
+        strncmp_passed += 1;
+    }
     printf("Strncmp: %i/5\n", strncmp_passed);
     fflush(stdout);
 
@@ -368,9 +417,9 @@ int main()
 {
 
     void *handle;
-    handle = dlopen("./libmy.so", RTLD_LAZY);
+    handle = dlopen("../libmy.so", RTLD_LAZY);
 
-    int total = 35;
+    int total = 45;
     int passed = 0;
     int failed = 0;
 
