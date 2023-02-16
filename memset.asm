@@ -8,17 +8,15 @@ memset:
     XOR RAX, RAX
     MOV RAX, 0
     MOV RCX, 0
-    MOV R8, RDI
 
 loop:
     CMP RDX, RCX
     JE end
-    MOV [RDI], SIL
-    PUSH RSI
-    INC RDI
+    MOV [RDI + RCX], SIL
     INC RCX
     JMP loop
 
 end:
+    MOV RAX, RDI
     LEAVE
     RET
