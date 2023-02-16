@@ -15,6 +15,7 @@ SRC = strlen.asm \
 		strcmp.asm \
 		strncmp.asm \
 		strcspn.asm \
+		strcasecmp.asm \
 
 SRC_T =
 
