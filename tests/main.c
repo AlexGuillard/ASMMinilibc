@@ -312,7 +312,6 @@ int strncmp_fonction(void *handle)
     *(void **)(&_strncmp) = dlsym(handle, "strncmp");
     int strncmp_passed = 0;
 
-        printf("%i", _strncmp("AAA", "AAAB", 3));
     if (_strncmp("AAA", "AAAB", 3) == 0) {
         strncmp_passed += 1;
     }
@@ -336,7 +335,35 @@ int strncmp_fonction(void *handle)
 
 int strcasecmp_fonction(void *handle)
 {
+    int (*_strcasecmp)(char *, char *);
+    *(void **)(&_strcasecmp) = dlsym(handle, "strcasecmp");
     int strcasecmp_passed = 0;
+
+        printf("%i\n", _strcasecmp("AAA", "AAAB"));
+        fflush(stdout);
+    if (_strcasecmp("AAA", "AAAB") == -98) {
+        strcasecmp_passed += 1;
+    }
+        printf("%i\n", _strcasecmp("", "ui"));
+        fflush(stdout);
+    if (_strcasecmp("", "ui") == -117) {
+        strcasecmp_passed += 1;
+    }
+        printf("%i\n", _strcasecmp("dfrety", "DFRETY"));
+        fflush(stdout);
+    if (_strcasecmp("dfrety", "DFRETY") == 0) {
+        strcasecmp_passed += 1;
+    }
+        printf("%i\n", _strcasecmp("AAAAAAa", "aa"));
+        fflush(stdout);
+    if (_strcasecmp("AAAAAAa", "a") == 97) {
+        strcasecmp_passed += 1;
+    }
+        printf("%i\n", _strcasecmp("abe", "abc"));
+        fflush(stdout);
+    if (_strcasecmp("abe", "abc") == 2) {
+        strcasecmp_passed += 1;
+    }
 
     printf("Strcasecmp: %i/5\n", strcasecmp_passed);
     fflush(stdout);
@@ -393,7 +420,7 @@ int main()
     void *handle;
     handle = dlopen("../libmy.so", RTLD_LAZY);
 
-    int total = 50;
+    int total = 55;
     int passed = 0;
     int failed = 0;
 
