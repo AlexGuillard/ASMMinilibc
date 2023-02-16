@@ -36,14 +36,16 @@ check:
 check_less:
     CMP BYTE [RSI], 0
     JE equal
-    MOV RAX, -1
-    JMP end
+    MOV R8B, BYTE [RDI]
+    MOV R9B, BYTE [RSI]
+    JMP check
 
 check_more:
     CMP BYTE [RDI], 0
     JE equal
-    MOV RAX, 1
-    JMP end
+    MOV R8B, BYTE [RDI]
+    MOV R9B, BYTE [RSI]
+    JMP check
 
 equal:
     MOV RAX, 0
