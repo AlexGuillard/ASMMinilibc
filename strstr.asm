@@ -38,9 +38,9 @@ not_find:
     JMP main_loop
 
 find:
+    MOV RAX, RDI
     JMP end
 
 end:
-    MOV RAX, RDI
     LEAVE
     RET
