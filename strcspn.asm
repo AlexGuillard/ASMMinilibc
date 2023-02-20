@@ -30,12 +30,12 @@ check_loop:
 
 not_find:
     INC RDI
+    INC RDX
     JMP main_loop
 
 find:
     INC RDI
-    INC RDX
-    JMP main_loop
+    JMP end
 
 end:
     MOV RAX, RDX
