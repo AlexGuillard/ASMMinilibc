@@ -339,28 +339,28 @@ int strcasecmp_fonction(void *handle)
     *(void **)(&_strcasecmp) = dlsym(handle, "strcasecmp");
     int strcasecmp_passed = 0;
 
-        printf("%i\n", _strcasecmp("AAA", "AAAB"));
-        fflush(stdout);
+        // printf("%i\n", _strcasecmp("AAA", "AAAB"));
+        // fflush(stdout);
     if (_strcasecmp("AAA", "AAAB") == -98) {
         strcasecmp_passed += 1;
     }
-        printf("%i\n", _strcasecmp("", "ui"));
-        fflush(stdout);
+        // printf("%i\n", _strcasecmp("", "ui"));
+        // fflush(stdout);
     if (_strcasecmp("", "ui") == -117) {
         strcasecmp_passed += 1;
     }
-        printf("%i\n", _strcasecmp("dfrety", "DFRETY"));
-        fflush(stdout);
+        // printf("%i\n", _strcasecmp("dfrety", "DFRETY"));
+        // fflush(stdout);
     if (_strcasecmp("dfrety", "DFRETY") == 0) {
         strcasecmp_passed += 1;
     }
-        printf("%i\n", _strcasecmp("AAAAAAa", "aa"));
-        fflush(stdout);
+        // printf("%i\n", _strcasecmp("AAAAAAa", "aa"));
+        // fflush(stdout);
     if (_strcasecmp("AAAAAAa", "a") == 97) {
         strcasecmp_passed += 1;
     }
-        printf("%i\n", _strcasecmp("abe", "abc"));
-        fflush(stdout);
+        // printf("%i\n", _strcasecmp("abe", "abc"));
+        // fflush(stdout);
     if (_strcasecmp("abe", "abc") == 2) {
         strcasecmp_passed += 1;
     }
@@ -373,7 +373,22 @@ int strcasecmp_fonction(void *handle)
 
 int strstr_fonction(void *handle)
 {
+    char  *(*_strstr)(char *, char *);
+    *(void **)(&_strstr) = dlsym(handle, "strstr");
     int strstr_passed = 0;
+
+    //char *str = strdup ("Oui et Non");
+    //printf("| %s |\n", _strstr("lihilhadfpjom", "adf"));
+    if (strcmp(_strstr("lihilhadfpjom", "adf"), "adfpjom") == 0)
+        strstr_passed += 1;
+    if (_strstr("", "adf") == NULL)
+        strstr_passed += 1;
+    if (_strstr("", "adf\0") == NULL)
+        strstr_passed += 1;
+    if (_strstr("", "ad") == NULL)
+        strstr_passed += 1;
+    if (_strstr("ui", "adf") == NULL)
+        strstr_passed += 1;
 
     printf("Strstr: %i/5\n", strstr_passed);
     fflush(stdout);
@@ -383,7 +398,12 @@ int strstr_fonction(void *handle)
 
 int strpbrk_fonction(void *handle)
 {
+    char* (*_strpbrk)(char *, char *);
+    *(void **)(&_strpbrk) = dlsym(handle, "strpbrk");
     int strpbrk_passed = 0;
+
+    char *str = strdup ("Oui et Non et");
+    printf("| %s |\n", _strpbrk(str, "wzt"));
 
     printf("Strpbrk: %i/5\n", strpbrk_passed);
     fflush(stdout);
@@ -397,18 +417,48 @@ int strcspn_fonction(void *handle)
     *(void **)(&_strcspn) = dlsym(handle, "strcspn");
     int  strcspn_passed = 0;
 
-    if (_strcspn("OUI", "OUI") == 3)
+    if (_strcspn("OUI", "OUI") == 0) {
         strcspn_passed += 1;
-    if (_strcspn("O", "U") == 0)
+        //printf("1 ");
+    }
+    if (_strcspn("O", "U") == 1) {
         strcspn_passed += 1;
-    if (_strcspn("OUI et NON", "OUIe") == 5)
+        //printf("2 ");
+    }
+    if (_strcspn("OUI et NON", "OUIe") == 0) {
         strcspn_passed += 1;
-    if (_strcspn("", "A") == 0)
+        //printf("3 ");
+    }
+    if (_strcspn("", "A") == 0) {
         strcspn_passed += 1;
-    if (_strcspn("AA", "") == 0)
+        //printf("4 ");
+    }
+    if (_strcspn("AA", "") == 2) {
         strcspn_passed += 1;
+        //printf("5 ");
+    }
+    if (_strcspn("frgtrynfvvreg", "fdz") == 0) {
+        strcspn_passed += 1;
+        //printf("6 ");
+    }
+    if (_strcspn("frgtrynfvvreg", "ayn") == 5) {
+        strcspn_passed += 1;
+        //printf("7 ");
+    }
+    if (_strcspn("efgrthyjhgzq0", "am0") == 12) {
+        strcspn_passed += 1;
+        //printf("8 ");
+    }
+    if (_strcspn("ui", "ad\0") == 2) {
+        strcspn_passed += 1;
+        //printf("9 ");
+    }
+    if (_strcspn("frgtrynfvvreg", "am") == 13) {
+        strcspn_passed += 1;
+        //printf("10 ");
+    }
 
-    printf("Strcspn: %i/5\n",  strcspn_passed);
+    printf("Strcspn: %i/10\n",  strcspn_passed);
     fflush(stdout);
 
     return  strcspn_passed;
@@ -418,9 +468,9 @@ int main()
 {
 
     void *handle;
-    handle = dlopen("../libmy.so", RTLD_LAZY);
+    handle = dlopen("./libmy.so", RTLD_LAZY);
 
-    int total = 55;
+    int total = 65;
     int passed = 0;
     int failed = 0;
 
