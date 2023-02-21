@@ -378,7 +378,7 @@ int strstr_fonction(void *handle)
     int strstr_passed = 0;
 
     //char *str = strdup ("Oui et Non");
-    //printf("| %s |\n", _strstr("lihilhadfpjom", "adf"));
+    printf("| %s |\n", _strstr("", ""));
     if (strcmp(_strstr("lihilhadfpjom", "adf"), "adfpjom") == 0)
         strstr_passed += 1;
     if (_strstr("", "adf") == NULL)

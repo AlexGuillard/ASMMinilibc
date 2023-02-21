@@ -15,6 +15,11 @@ strstr:
     XOR R9, R9
     MOV R9, 0
 
+    CMP BYTE [RDI], 0
+    JNE main_loop
+    CMP BYTE [RSI], 0
+    JE find
+
 main_loop:
     CMP BYTE [RDI], 0
     JE end
