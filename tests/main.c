@@ -263,6 +263,16 @@ int memcpy_fonction(void *handle)
 
     free(strmemcpy1);
 
+    char *strmemcpy2 = strdup("AAAABBAAAAAAAAAAAAAAAAA");
+
+    printf("%s", _memcpy(&strmemcpy2[3], &strmemcpy2[5], 2));
+        printf("| %s | %i\n", strmemcpy2, strcmp(strmemcpy2, "AAABABAAAAAAAAAAAAAAAAA"));
+    if (strcmp(strmemcpy2, "fd") == 0) {
+        memcpy_passed += 1;
+    }
+
+    free(strmemcpy2);
+
     printf("Memcpy: %i/5\n", memcpy_passed);
     fflush(stdout);
 
