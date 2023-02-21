@@ -267,13 +267,59 @@ int memcpy_fonction(void *handle)
 
     printf("%s", _memcpy(&strmemcpy2[3], &strmemcpy2[5], 2));
         printf("| %s | %i\n", strmemcpy2, strcmp(strmemcpy2, "AAABABAAAAAAAAAAAAAAAAA"));
-    if (strcmp(strmemcpy2, "fd") == 0) {
+    if (strcmp(strmemcpy2, "AAABABAAAAAAAAAAAAAAAAA") == 0) {
         memcpy_passed += 1;
     }
 
     free(strmemcpy2);
 
-    printf("Memcpy: %i/5\n", memcpy_passed);
+    char *strmemcpy3 = NULL;
+    char *strmemcpy4 = strdup("AAAA");
+
+    printf("%s", _memcpy(strmemcpy3, strmemcpy4, 0));
+        printf("| %s |\n", strmemcpy3);
+    if (strmemcpy3 == 0) {
+        memcpy_passed += 1;
+    }
+
+    free(strmemcpy3);
+    free(strmemcpy4);
+
+    char *strmemcpy5 = strdup("AAAA");
+    char *strmemcpy6 = NULL;
+
+    printf("%s", _memcpy(strmemcpy5, strmemcpy6, 0));
+        printf("| %s |\n", strmemcpy3);
+    if (strmemcpy3 == 0) {
+        memcpy_passed += 1;
+    }
+
+    free(strmemcpy5);
+    free(strmemcpy6);
+
+    char *strmemcpy7 = strdup("AAAABBAAAAAAAAAAAAAAAAA");
+
+    printf("| %s |", _memcpy(&strmemcpy7[2], &strmemcpy7[4], 2));
+        printf("| %s | %i\n", strmemcpy7, strcmp(strmemcpy7, "AABBBBAAAAAAAAAAAAAAAAA"));
+    if (strcmp(strmemcpy7, "AABBBBAAAAAAAAAAAAAAAAA") == 0) {
+        memcpy_passed += 1;
+    }
+
+    free(strmemcpy7);
+
+    char *strmemcpy8 = strdup("AAAA");
+    char *strmemcpy9 = NULL;
+
+    printf("%s", _memcpy(strmemcpy8, strmemcpy9, 0));
+        printf("| %s |\n", strmemcpy8);
+    if (strmemcpy3 == 0) {
+        memcpy_passed += 1;
+    }
+
+    free(strmemcpy5);
+    free(strmemcpy6);
+
+    printf("Memcpy: %i/10\n", memcpy_passed);
     fflush(stdout);
 
     return memcpy_passed;
@@ -480,7 +526,7 @@ int main()
     void *handle;
     handle = dlopen("./libmy.so", RTLD_LAZY);
 
-    int total = 65;
+    int total = 70;
     int passed = 0;
     int failed = 0;
 

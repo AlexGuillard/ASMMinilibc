@@ -22,8 +22,6 @@ memcpy:
 loop:
     CMP RDX, RCX
     JE end
-    CMP BYTE [RSI], 0
-    JE end 
     MOV R8B, BYTE [RSI]
     MOV [RDI + RCX], R8B
     INC RCX
